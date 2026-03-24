@@ -1,0 +1,12 @@
+- label: Suspend
+  icon_lucide: Moon
+  action: suspend
+
+- label: Reboot
+  icon_lucide: RotateCcw
+  action: reboot
+
+- label: Shutdown
+  icon_lucide: Power
+  action: shutdown
+  danger: true

@@ -1,0 +1,17 @@
+type: wifi
+order: 3
+
+icon_on:
+  icon_lucide: Wifi
+icon_off:
+  icon_lucide: WifiOff
+
+menu:
+  - label: Scan networks
+    icon_lucide: ScanSearch
+    action: wifi_scan
+  - divider: true
+  - label: Disconnect
+    icon_lucide: WifiOff
+    action: wifi_forget
+    danger: true

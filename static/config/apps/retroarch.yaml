@@ -1,0 +1,19 @@
+name: RetroArch
+icon_simple: retroarch
+exec: retroarch
+order: 1
+
+left_click:
+  - label: Open RetroArch
+    icon_lucide: Play
+    action: launch
+
+right_click:
+  - label: Force quit
+    icon_lucide: X
+    action: kill
+    danger: true
+  - divider: true
+  - label: Remove from bar
+    icon_lucide: Minus
+    action: remove_from_bar

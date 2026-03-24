@@ -1,0 +1,15 @@
+name: Terminal
+icon_lucide: SquareTerminal
+exec: foot
+order: 2
+
+left_click:
+  - label: Open Terminal
+    icon_lucide: Play
+    action: launch
+
+right_click:
+  - label: Force quit
+    icon_lucide: X
+    action: kill
+    danger: true

@@ -1,0 +1,11 @@
+theme:
+  mode: dark
+  accent: "#3bb085"
+  bar_opacity: 0.88
+  bar_height: 40
+  dock_size: 180
+  font_size: 13
+
+bar:
+  show_seconds: false
+  show_date: true

@@ -1,0 +1,20 @@
+type: bluetooth
+order: 2
+
+icon_on:
+  icon_lucide: Bluetooth
+icon_off:
+  icon_lucide: BluetoothOff
+
+menu:
+  - label: Toggle
+    icon_lucide: Power
+    action: bluetooth_toggle
+  - label: Scan devices
+    icon_lucide: ScanSearch
+    action: bluetooth_scan
+  - divider: true
+  - label: A2DP sink
+    icon_lucide: Music
+    action: bluetooth_sink_toggle
+    badge_when_active: sink

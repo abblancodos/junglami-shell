@@ -1,0 +1,26 @@
+type: volume
+order: 1
+show_badge: true
+
+icon_muted:
+  icon_lucide: VolumeX
+icon_low:
+  icon_lucide: Volume
+icon_mid:
+  icon_lucide: Volume1
+icon_high:
+  icon_lucide: Volume2
+
+menu:
+  - slider: true
+    label: Volume
+    action: volume_set
+    min: 0
+    max: 100
+    step: 1
+    get_value: volume
+  - divider: true
+  - label: Mute
+    icon_lucide: VolumeX
+    action: volume_set
+    value: 0
