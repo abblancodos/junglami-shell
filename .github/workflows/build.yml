@@ -1,0 +1,61 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Package production build
+        run: |
+          mkdir -p deploy
+          cp -r build/. deploy/
+          cp package.json deploy/
+          cd deploy
+          npm install --production --ignore-scripts
+          cd ..
+          SHA=$(git rev-parse --short HEAD)
+          tar -czf junglami-shell-${SHA}.tar.gz -C deploy .
+          echo "SHA=${SHA}" >> $GITHUB_ENV
+          echo "TARBALL=junglami-shell-${SHA}.tar.gz" >> $GITHUB_ENV
+
+      - name: Compute checksum
+        run: |
+          sha256sum ${TARBALL} > ${TARBALL}.sha256
+          cat ${TARBALL}.sha256
+
+      - name: Delete existing latest release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release delete latest --yes 2>/dev/null || true
+          git push origin :refs/tags/latest 2>/dev/null || true
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create latest \
+            --title "Latest build (${SHA})" \
+            --notes "Automated build from commit ${SHA}" \
+            --latest \
+            ${TARBALL} \
+            ${TARBALL}.sha256
